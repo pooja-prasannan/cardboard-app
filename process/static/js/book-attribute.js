@@ -152,6 +152,7 @@ $(document).ready(function() {
                  var book_width =$("#book-width").val();
                  var book_height =$("#book-height").val();
                  var book_thickness = $('#book-thickness').val();
+                 var hex_value=$('#hex_value').val();
                  var material_type = $("#material_type option:selected").val();
                  var r1 = $("#r1").val();
                  var r2 = $("#r2").val();
@@ -165,6 +166,7 @@ $(document).ready(function() {
                  "book_height":book_height,
                  "book_thickness":book_thickness,
                  "material_type":material_type,
+                 "hex_value":hex_value
                  "r1":r1,
                  "r2":r2,
                  "r3":r3,
