@@ -125,16 +125,19 @@ class Base64ImageView(View):
 class MergeImageView(View):
 
     def post(self, request):
+
         json_data = json.loads(request.body.decode('utf-8'))
         img_lis = []
-        components = ['front_cover', 'back_cover', 'total_tabs', 'total_stacks']
+        components = ['front_cover', 'back_cover', 'spine', 'pages']
         book_attr_data = json_data.get('book_attribute')
         upload_id = json_data.get('upload_id')
-        tab_settings_data = json_data.get('tab_settings')
-        hello_world(book_attr_data, tab_settings_data,upload_id)
+
+        hello_world(book_attr_data, upload_id)
         save_book_attributes(book_attr_data, upload_id)
         merge_img_data = eval(json_data.get('merge_image'))
+
         for cmp in components[:2]:
+
             data = merge_img_data.get(cmp)
             d = list(map(int, data))
             it = iter(d)
@@ -153,24 +156,24 @@ class MergeImageView(View):
                     img_lis.append(url)
 
         for cmp in components[2:]:
-            for i, each in enumerate(merge_img_data.get(cmp)):
-
-                d = list(map(int, each))
-                it = iter(d)
-                for id, x in enumerate(it):
-
-                    image_id = "{}{}_{}.png".format(cmp, i, id)
-                    try:
-                        merge_image([x, next(it)], image_id, upload_id)
-                        url = "{}upload/{}/finalOutput/{}".format(settings.MEDIA_URL, upload_id, image_id)
-                        img_lis.append(url)
-                    except Exception as e:
-                        image_id = "{}{}_{}.png".format(cmp, i, id)
-                        old_image = open(os.path.join(settings.MEDIA_ROOT, 'upload', upload_id, "image{}.png".format(x)), 'rb').read()
-                        new_img = open(os.path.join(settings.MEDIA_ROOT, 'upload', upload_id, 'finalOutput', image_id), 'wb')
-                        new_img.write(old_image)
-                        url = "{}upload/{}/finalOutput/{}".format(settings.MEDIA_URL, upload_id, image_id)
-                        img_lis.append(url)
+            data = merge_img_data.get(cmp)
+            d = list(map(int, data))
+            it = iter(d)
+            for id, x in enumerate(it):
+                image_id = "{}{}.png".format(cmp, id)
+                try:
+                    merge_image([x, next(it)], image_id, upload_id)
+                    url = "{}upload/{}/finalOutput/{}".format(settings.MEDIA_URL, upload_id, image_id)
+                    img_lis.append(url)
+                except Exception as e:
+                    image_id = "{}{}.png".format(cmp, id)
+                    old_image = open(os.path.join(settings.MEDIA_ROOT, 'upload', upload_id, "image{}.png".format(x)),
+                                     'rb').read()
+                    new_img = open(os.path.join(settings.MEDIA_ROOT, 'upload', upload_id, 'finalOutput', image_id),
+                                   'wb')
+                    new_img.write(old_image)
+                    url = "{}upload/{}/finalOutput/{}".format(settings.MEDIA_URL, upload_id, image_id)
+                    img_lis.append(url)
 
         return JsonResponse({'img_url': img_lis})
 
@@ -179,13 +182,11 @@ def merge_image(image_merge_list, image_id, upload_id):
 
     image_path_list = list(map(lambda x: os.path.join(settings.MEDIA_ROOT, 'upload', upload_id, "image"+str(x))+".png", image_merge_list))
     images = list(map(Image.open, list(image_path_list)))
-
     widths, heights = zip(*(i.size for i in images))
-
     total_width = sum(widths)
     max_height = max(heights)
-
     new_im = Image.new('RGB', (total_width, max_height))
+    new_im = new_im.resize((1024, 1024), Image.ANTIALIAS)#this resize the image to 1024 px
 
     x_offset = 0
     for im in images:
@@ -201,6 +202,6 @@ def save_book_attributes(book_attr_data, upload_id):
     json_file.write("\n")
 
 
-def hello_world(book_attr_data, tab_settings_data,upload_id):
-    print("HELLOOOOOOOOOO WORLDDDDDDDDDDDDDDDDDDDDD")
-    print(book_attr_data, tab_settings_data,upload_id)
+def hello_world(book_attr_data,upload_id):
+
+    print(book_attr_data, upload_id)

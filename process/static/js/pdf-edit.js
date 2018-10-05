@@ -69,14 +69,7 @@ $(document).ready(function() {
                         "transform":"scale("+counter+")",
                         "transform-origin": "0px 0px"
                     });
-                     if(counter == 1)
-                    {
-                        //$(".cropper-line.line-n").css({"height":"1px"})
-                         //$(".cropper-line.line-s").css({"height":"1px"})
-                         //$(".cropper-line.line-e").css({"width":"1px"})
-                         //$(".cropper-line.line-w").css({"width":"1px"})
-                         //$(".cropper-point").css({"width":"6px", "height":"6px",})
-                    }
+
 
              });
 
@@ -93,24 +86,7 @@ $(document).ready(function() {
                         "transform":"scale("+counter+")",
                         "transform-origin": "0px 0px"
                     });
-                      //if(counter == 1)
-                    //{
-                        //$(".cropper-line.line-n").css({"height":"1px"})
-                    //}
-                    //else
-                    //{
-                         //$(".cropper-line.line-n").css({"height":borderVal+"px"})
-                         //$(".cropper-line.line-e").css({"width":borderVal+"px"})
-                         //$(".cropper-line.line-w").css({"width":borderVal+"px"})
-                         //if(counter <= 1.75)
-                         //{
-                         //$(".cropper-point").css({
-                         //"width":borderWidth+"px",
-                         //"height":borderWidth+"px",
-                         //})
-                         //}
 
-                    //}
                     $('.demo').draggable();
 
              });
@@ -129,23 +105,7 @@ $(document).ready(function() {
                         "transform-origin": "0px 0px"
                     });
 
-                      //if(counter == 1)
-                    //{
-                        //$(".cropper-line.line-n").css({"height":"1px"})
-                    //}
-                    //else
-                    //{
-                          //$(".cropper-line.line-n").css({"height":"1px"})
-                         //$(".cropper-line.line-s").css({"height":"1px"})
-                         //$(".cropper-line.line-e").css({"width":"1px"})
-                         //$(".cropper-line.line-w").css({"width":"1px"})
-                         // $(".cropper-point").css({
-                         //"width":borderWidth+"px",
-                         //"height":borderWidth+"px",
-                         //})
 
-
-                    //}
 
                     $('li.active img').draggable();
             });
@@ -166,7 +126,7 @@ $(document).ready(function() {
                     $("#header ul").append(`<li data-thumb=`+crop_src+`><img id =`+cropped_img+`  src=`+crop_src+`/></li>`);
                   }
              }
-              if(data["back_cover"].includes(crop_element))
+              else if(data["back_cover"].includes(crop_element))
              {
 
                for( let bc=0;bc<data["back_cover"].length;bc++)
@@ -177,30 +137,19 @@ $(document).ready(function() {
                   }
              }
 
-              for( let sc=0;sc<data["total_stacks"].length;sc++)
-              {
-                 if(data["total_stacks"][sc].includes(crop_element))
-                    {
-                        for(let scc =0;scc<data["total_stacks"][sc].length;scc++){
-                        cropped_img=data["total_stacks"][sc][scc];
-                        let crop_src=$("#"+cropped_img).find('img').attr('src');
-                        $("#header ul").append(`<li data-thumb=`+crop_src+`><img id =`+cropped_img+` src=`+crop_src+`/></li>`);
-                         }
-                     }
-             }
+               else if(data["pages"].includes(crop_element)) {
+            for( let ps=0;ps<data["pages"].length;ps++){
+                cropped_img=data["pages"][ps];
+                let crop_src=$("#"+cropped_img).find('img').attr('src');
+                $("#header ul").append(`<li data-thumb=`+crop_src+`><img id =`+cropped_img+` src=`+crop_src+`/></li>`);
+            }
+         }
+         else{
+            cropped_img=data["spine"][0];
+            let crop_src=$("#"+cropped_img).find('img').attr('src');
+            $("#header ul").append(`<li data-thumb=`+crop_src+`><img id =`+cropped_img+` src=`+crop_src+`/></li>`);
 
-             for( let tc=0;tc<data["total_tabs"].length;tc++)
-             {
-                if(data["total_tabs"][tc].includes(crop_element))
-              {
-                 for(let tcc =0;tcc<data["total_tabs"][tc].length;tcc++)
-                 {
-                    cropped_img=data["total_tabs"][tc][tcc];
-                    let crop_src=$("#"+cropped_img).find('img').attr('src');
-                    $("#header ul").append(`<li data-thumb=`+crop_src+`><img id =`+cropped_img+` src=`+crop_src+`/></li>`);
-                 }
-              }
-             }
+         }
 
         $("#lightSlider").lightSlider({
             gallery: true,
@@ -215,10 +164,6 @@ $(document).ready(function() {
                 cropperElements = document.getElementsByClassName("cropper-point");
                 cropperLines = document.getElementsByClassName("cropper-line");
                 redBoarder = document.getElementsByClassName("red-boarder");
-
-                
-
-
                 var i;
                   
                   for (i = 0; i < cropperElements.length; i++) {
