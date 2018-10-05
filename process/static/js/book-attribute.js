@@ -166,7 +166,7 @@ $(document).ready(function() {
                  "book_height":book_height,
                  "book_thickness":book_thickness,
                  "material_type":material_type,
-                 "hex_value":hex_value
+                 "hex_value":hex_value,
                  "r1":r1,
                  "r2":r2,
                  "r3":r3,
