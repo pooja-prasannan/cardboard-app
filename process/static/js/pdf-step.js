@@ -59,14 +59,14 @@ var order_data_array;
                 data["order"] = image_ids
                 data = JSON.stringify(data)
                 window.localStorage.setItem('data', data);
-                console.log(window.localStorage.getItem('data'))
+
             }
         });
 
         $( "#next-button, #book_save" ).click(function(e) {
 
 
-            console.log(window.localStorage.getItem('data'));
+
             e.preventDefault();
             var current_step = $("#next-button ").data("current-step");
 
@@ -78,12 +78,12 @@ var order_data_array;
                    selected: function(event, ui){
                        if ((ui.selected.id) && (!window.selected.includes(ui.selected.id))) {
                            window.selected.push(ui.selected.id);
-                           console.log("selected--->", selected);
+
                        }
                    },
                    unselected: function(event, ui){
                        window.selected.remove(ui.unselected.id);
-                       console.log("remove--->", selected);
+
                    }
                });
                $("#next-button ").data("current-step","front_cover");
@@ -93,7 +93,7 @@ var order_data_array;
             //To select the front_cover and store in local storage
             if (current_step == "front_cover") {
 
-                console.log("--->", selected);
+
                 if (window.selected.length != 2) {
                     alert("Please select  2 Front Covers");
                     return false;
@@ -178,7 +178,7 @@ var order_data_array;
        function name(){
 
         if (window.selected.length != 1) {
-            alert("Please select  1 spine")
+            alert("Please select  1 spine and pages must be EVEN number")
             return false;
         }
 
@@ -186,7 +186,7 @@ var order_data_array;
         data = JSON.parse(data)
 
         var current_order =  data['order'];
-        console.log(current_order)
+
           for (i = 0; i < data["back_cover"].length; i++) {
               current_order.remove(data["back_cover"][i])
           }
@@ -237,11 +237,11 @@ var order_data_array;
     }
     data["spine"] = tab;
     data["pages"] = stack;
-    console.log("pages and spines",data["spine"],data["pages"])
-    console.log("order",current_order)
+
     if(data["pages"].length %2 !=0)
     {
-      alert("Pages must be  EVEN ")
+      alert("Pages must be  EVEN ");
+      return false;
     }
 
     // enabling sortable before adding
@@ -273,7 +273,7 @@ var order_data_array;
                 }
             }
             else{
-                console.log("drag_data pages", drag_data);
+
                 for(var stacks=1;stacks<data["pages"].length;stacks++){
                     $("#"+data["pages"][stacks]).remove();
                     $("#"+drag_id).after(`<div id = ${data["pages"][stacks]} class="images-ids" data-order="pages" class="ui-state-default" style="display: none">
@@ -353,7 +353,6 @@ var order_data_array;
             return $(this).attr('data-order')
         }).get()
         var data_order_values = Array.from((new Set(values)))
-        console.log("data_order_values", data_order_values)
         data_global = window.localStorage.getItem('data');
         data_global = JSON.parse(data_global)
         order_data_array=[]
