@@ -50,8 +50,8 @@ $(document).ready(function() {
                     $("#copy").html(
                     `<div class="page-items">
                      <span>Book Thickness <input type="number" name="book-thickness" value=".5" id="book-thickness" maxlength="4">%</span>
-                     <span>Book Height <input type="number" name="book_height" value="8.27" id="book-height" maxlength="4"></span>
-                     <span>Book Width <input type="number" name="book_width" value="11" id="book-width" maxlength="4"></span>
+                     <span>Book Height <input type="number" name="book_height" value="11" id="book-height" maxlength="4"></span>
+                     <span>Book Width <input type="number" name="book_width" value="8.5" id="book-width" maxlength="4"></span>
 
 
                      <span>Material Type <select name="material_type" id="material_type">
@@ -112,9 +112,7 @@ $(document).ready(function() {
             var bookHgt = $("#book-height").val();
 
             $(".thickness").height(bookthick*50);
-             $(".paper").css({"width": 600/(ratio)});
-
-
+            $(".paper").css({"width": (bookWdth/bookHgt)*600});
             $(".side").css({"width": (bookWdth/bookHgt)*600});
             $(".paper").css({"border-top-right-radius": 6 * r1 +"px"});
             $(".paper").css({"border-bottom-right-radius":6 * r2 +"px"});
