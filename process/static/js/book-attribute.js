@@ -100,6 +100,9 @@ $(document).ready(function() {
                 })
 
             $(".rings").empty();
+            var ratio = height/width;
+            var roundedHeight = +(ratio*$("#book-width").val()).toFixed(2);
+            $("#book-height").val(roundedHeight);
             $(".tabs-tags").empty();
             var r1 = $("#r1").val();
             var r2 = $("#r2").val();
