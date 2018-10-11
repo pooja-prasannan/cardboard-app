@@ -65,8 +65,6 @@ var order_data_array;
 
         $( "#next-button, #book_save" ).click(function(e) {
 
-
-
             e.preventDefault();
             var current_step = $("#next-button ").data("current-step");
 
@@ -176,6 +174,7 @@ var order_data_array;
       });
 
        function name(){
+       console.log(window.selected)
 
         if (window.selected.length != 1) {
             alert("Please select  1 spine and pages must be EVEN number")
@@ -318,9 +317,12 @@ var order_data_array;
     $(".images-ids").addClass("context-menu-one");
     $("#lbl-step-title").append(`&nbsp <button name="define_book" class="orange-btn" id="define_book">Define Book Attribute</button>`);
     $("#lbl-step-title").append(`&nbsp <button name="save_btn" class="orange-btn" id="save_btn">Save</button>`);
-    // $("#next-button").html("Build Book");
-    $("#next-button").hide();
+    $("#next-button").html("Build Book");
+    $("#next-button").show();
     $("#next-button").attr("id","build-book");
+    $("#build-book").show();
+
+
     $("#sortable").append(`<div class="add-btn-div"><button name="add_btn" id="add_btn"> Add + </button></div>`);
     $("#add_btn").addClass("context-menu-two");
     $(".images-ids").bind("contextmenu",function(e){

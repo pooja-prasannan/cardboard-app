@@ -7,9 +7,10 @@ $(document).ready(function() {
                 $("#lbl-step-title ").text("Set Book Attribute");
                 $("#lbl-step-title").append(`&nbsp <button name="back_to_refinement" class="orange-btn" id="back_to_refine">Back</button>`);
                 $("#next-button").attr("id","build-book");
-                $("#build-book").show();
+                $("#build-book").hide();
                 $("#build-book").html("Build Book");
                 $("#sortable").hide();
+
                  if(status && !$('#copy').html()){
                  $("#copy").html(
                     `<div class="page-items">
@@ -46,11 +47,15 @@ $(document).ready(function() {
                   else{
                  $("#copy").show();
                  }
+
+
                 if( !$('#copy').html()){
+                var ratio = height/width;
+                 var roundedHeight = +(ratio*8.5).toFixed(2);
                     $("#copy").html(
                     `<div class="page-items">
                      <span>Book Thickness <input type="number" name="book-thickness" value=".5" id="book-thickness" maxlength="4">%</span>
-                     <span>Book Height <input type="number" name="book_height" value="11" id="book-height" maxlength="4"></span>
+                     <span>Book Height <input type="number" name="book_height" value=${roundedHeight} id="book-height" maxlength="4"></span>
                      <span>Book Width <input type="number" name="book_width" value="8.5" id="book-width" maxlength="4"></span>
 
 
@@ -83,10 +88,20 @@ $(document).ready(function() {
                             </div>
 
                     </div>`);
+                    setTimeout(function(){
+                        $(".thickness").css({"width": 600/ratio});
+                        $(".paper").css({"width": 600/ratio});
+                         $(".side").css({"width": 600/ratio});
+                     },500);
             }
 
             else{
                 $("#copy").show();
+                setTimeout(function(){
+                        $(".thickness").css({"width": 600/$('book-height').val()/$('book-width').val()});
+                        $(".paper").css({"width": 600/$('book-height').val()/$('book-width').val()});
+                         $(".side").css({"width": 600/$('book-height').val()/$('book-width').val()});
+                     },500);
             }
 
             setTimeout(function(){
@@ -102,7 +117,7 @@ $(document).ready(function() {
             $(".rings").empty();
             var ratio = height/width;
             var roundedHeight = +(ratio*$("#book-width").val()).toFixed(2);
-            $("#book-height").val(roundedHeight);
+//            $("#book-height").val(roundedHeight);
             $(".tabs-tags").empty();
             var r1 = $("#r1").val();
             var r2 = $("#r2").val();
@@ -138,7 +153,6 @@ $(document).ready(function() {
                 $(".paper").css({"width": (bookWdth/bookHgt)*600});
                 $(".side").css({"width": (bookWdth/bookHgt)*600});
                 $(".thickness").css({"width": (bookWdth/bookHgt)*600})
-//                 $(".thickness").height((600*bookthick)/100);
                 $(".thickness").height(bookthick*50);
                 $(".paper").css({"border-top-right-radius": 6 * r1 +"px"});
                 $(".paper").css({"border-bottom-right-radius":6 * r2 +"px"});
@@ -201,8 +215,8 @@ $(document).ready(function() {
 
             $(document).on("click", '#back_to_refine', function(e){
 
-               $("#copy").hide();
-               $("#build-book").hide();
+              $("#copy").hide();
+              $("#build-book").show();
               $("#lbl-step-title ").text("Refine Components");
 
               $("#lbl-step-title").append(`&nbsp <button name="define_book" class="orange-btn" id="define_book">Define Book Attribute</button>`);
