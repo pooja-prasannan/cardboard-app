@@ -9,6 +9,7 @@ $(document).ready(function() {
                 $("#next-button").attr("id","build-book");
                 $("#build-book").hide();
                 $("#build-book").html("Build Book");
+                $("#imgInp").hide();
                 $("#sortable").hide();
 
                  if(status && !$('#copy').html()){
@@ -46,6 +47,8 @@ $(document).ready(function() {
                  }
                   else{
                  $("#copy").show();
+                 var selectedMaterial = $("#material_type").val();
+                 $("#material_type").val(selectedMaterial);
                  }
 
 
@@ -97,6 +100,8 @@ $(document).ready(function() {
 
             else{
                 $("#copy").show();
+                var selectedMaterial = $("#material_type").val();
+                $("#material_type").val(selectedMaterial);
                 setTimeout(function(){
                         $(".thickness").css({"width": 600/$('book-height').val()/$('book-width').val()});
                         $(".paper").css({"width": 600/$('book-height').val()/$('book-width').val()});

@@ -90,12 +90,14 @@ var order_data_array;
 
             //To select the front_cover and store in local storage
             if (current_step == "front_cover") {
-
-
-                if (window.selected.length != 2) {
-                    alert("Please select  2 Front Covers");
-                    return false;
-                }
+              if (window.selected.length > 2 ) {
+                  alert("Please select 1 or 2  Front Cover")
+                  return false;
+              }
+              if (window.selected.length  == 0 ) {
+                  alert("Please select  Front Cover")
+                  return false;
+              }
                 var data = window.localStorage.getItem('data');
                 data = JSON.parse(data)
                 data["front_cover"] = window.selected
@@ -131,10 +133,14 @@ var order_data_array;
                      }
                      loops++;
                 }
-                 if (data["back_cover"].length != 2) {
-                    alert("Please select 2 Back Covers")
-                    return false;
-                }
+                if (data["back_cover"].length > 2) {
+                   alert("Please select 1 or 2 Back Cover")
+                   return false;
+               }
+               if (window.selected.length  == 0 ) {
+                   alert("Please select  Back Cover")
+                   return false;
+               }
                 var back_cover = data["back_cover"];
                  for (i = 0; i < back_cover.length; i++) {
                         $("#"+back_cover[i]).hide();
