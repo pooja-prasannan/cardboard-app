@@ -4,7 +4,7 @@ $(document).ready(function() {
         $(document).on("click", '#define_book', function(e){
 
                 $("#next-button ").data("current-step","set-book-attributes");
-                $("#lbl-step-title ").text("Set Book Attribute");
+                $("#lbl-step-title ").text("Set Book Attributes");
                 $("#lbl-step-title").append(`&nbsp <button name="back_to_refinement" class="orange-btn" id="back_to_refine">Back</button>`);
                 $("#next-button").attr("id","build-book");
                 $("#build-book").hide();

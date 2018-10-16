@@ -218,7 +218,7 @@ var keys;
                 function readURL(input)
                     {
 
-                        if ( input.files) {
+                        if ( input.files.length%2==0) {
                         console.log("imp",input.files)
                         var base64data=[];
                         var filesAmount = input.files.length;
@@ -228,6 +228,10 @@ var keys;
                           getBase64(input, input.files[i])
 
                            }
+                         }
+                         else{
+                           alert("You must upload  EVEN number of files")
+                         return false;
                          }
                     }
 
@@ -346,7 +350,7 @@ var keys;
                 function readURL_stack(input, keys)
                     {
 
-                        if ( input.files.length==2) {
+                        if ( input.files.length%2==0) {
                         console.log("imp",input.files)
                         var base64data=[];
                         var filesAmount = input.files.length;
@@ -357,7 +361,8 @@ var keys;
                            }
                          }
                          else{
-                          alert("You must upload  2 files")
+                           alert("You must upload  EVEN number of files")
+                            return false;
                          }
                     }
 
@@ -436,7 +441,7 @@ var keys;
                                      if(inc%2==0)
                                        {
                                          $("#"+new_max).find("img").show();
-                                         $("#"+new_max).append(`<div><label for="name">Tab</label></div>`);
+                                         $("#"+new_max).append(`<div><label for="name">Spine</label></div>`);
 
                                        }
                                      else
@@ -467,7 +472,7 @@ var keys;
             items: {
                 "front": {name: "Front Cover"},
                 "stack": {name: "Pages"},
-                "tab": {name: "Tabs"},
+                "tab": {name: "Spine"},
                 "back": {name: "Back Cover"},
 
 
