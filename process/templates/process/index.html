@@ -50,6 +50,7 @@ box-sizing: border-box;
     <link rel="stylesheet" href="{% static 'css/slider.css' %}"/>
     <link rel="stylesheet" href="{% static 'css/perfect-scrollbar.css' %}"/>
 
+
     <script type="text/javascript">
 
         var jsonData = {{json_images |safe }};
@@ -99,10 +100,10 @@ box-sizing: border-box;
     <!--<script src="https://www.jqueryscript.net/demo/jQuery-Plugin-For-Panning-Zooming-Any-Elements-panzoom/dist/jquery.panzoom.js"></script>-->
     <script src="{% static 'js/jquery.panzoom.js' %}"></script>
     <script src="{% static 'js/perfect-scrollbar.min.js' %}"></script>
-    <script src="{% static 'js/pdf-step.js' %}"></script>
-    <script src="{% static 'js/pdf-edit.js' %}"></script>
-    <script src="{% static 'js/pdf-add.js' %}"></script>
-    <script src="{% static 'js/book-attribute.js' %}"></script>
+    <script src="{% static 'js/pdf-steps.js' %}"></script>
+    <script src="{% static 'js/pdf-edits.js' %}"></script>
+    <script src="{% static 'js/pdf-adds.js' %}"></script>
+    <script src="{% static 'js/book-attributes.js' %}"></script>
 
 
 {% block content %}
@@ -125,7 +126,7 @@ box-sizing: border-box;
                     });
                </script>
            </div>
-           
+
             <div id="steps" style="display:none">
                 <div class="dem">
                     <div id="sortable" class="ui-state-default images">
@@ -192,4 +193,3 @@ box-sizing: border-box;
 {% endblock %}
 </body>
 </html>
-
