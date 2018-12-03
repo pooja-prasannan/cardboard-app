@@ -243,4 +243,45 @@ $(document).ready(function() {
               $("#sortable").show();
 
             });
+
+            $(document).on("click", '#save_btn', function(e){
+                var book_width =$("#book-width").val();
+                var book_height =$("#book-height").val();
+                var book_thickness = $('#book-thickness').val();
+                var hex_value=$('#hex_value').val();
+                var material_type = $("#material_type option:selected").val();
+                var r1 = $("#r1").val();
+                var r2 = $("#r2").val();
+                var r3 = $("#r3").val();
+                var r4 = $("#r4").val();
+                var final_data={
+                "book_width":book_width,
+                "book_height":book_height,
+                "book_thickness":book_thickness,
+                "material_type":material_type,
+                "hex_value":hex_value,
+                "r1":r1,
+                "r2":r2,
+                "r3":r3,
+                "r4":r4
+               }
+               var formdata ={ "book_attribute":final_data,
+                               "upload_id":upload_id,
+                               "merge_image":window.localStorage.getItem('data')
+               }
+             // Use `jQuery.ajax` method
+             $.ajax('/save/', {
+               method: "POST",
+               data: JSON.stringify(formdata ),
+               processData: false,
+               contentType: false,
+               success(data) {
+               console.log(data);
+                   $('#sortable').show()
+               },
+               error() {
+                 console.log('Upload error');
+               },
+             });
+            });
     });

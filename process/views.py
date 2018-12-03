@@ -136,7 +136,6 @@ class MergeImageView(View):
         hello_world(book_attr_data, upload_id, merge_img_data)
 
         save_book_attributes(book_attr_data, upload_id, merge_img_data)
-        print("merge_image",merge_img_data)
 
         for cmp in components[:2]:
 
@@ -179,6 +178,17 @@ class MergeImageView(View):
 
         return JsonResponse({'img_url': img_lis})
 
+class SaveView(View):
+
+    def post(self, request):
+
+        json_data = json.loads(request.body.decode('utf-8'))
+        book_attr_data = json_data.get('book_attribute')
+        upload_id = json_data.get('upload_id')
+        merge_img_data = eval(json_data.get('merge_image'))
+        save_book_attributes(book_attr_data, upload_id, merge_img_data)
+        return JsonResponse({'message': "Success"})        
+
 
 def merge_image(image_merge_list, image_id, upload_id):
 
@@ -188,24 +198,23 @@ def merge_image(image_merge_list, image_id, upload_id):
     total_width = sum(widths)
     max_height = max(heights)
     new_im = Image.new('RGB', (total_width, max_height))
-    # new_im = new_im.resize((1024, 1024), Image.ANTIALIAS)#this resize the image to 1024 px
+    
 
     x_offset = 0
     for im in images:
         new_im.paste(im, (x_offset, 0))
         x_offset += im.size[0]
 
+    new_im = new_im.resize((1024, 1024), Image.ANTIALIAS)#this resize the image to 1024 px
     new_im.save(os.path.join(settings.MEDIA_ROOT, 'upload', upload_id, 'finalOutput', image_id))
 
 
 def save_book_attributes(book_attr_data, upload_id, merge_img_data):
-    json_file = open(os.path.join(settings.MEDIA_ROOT, 'upload', upload_id, 'finalOutput', 'book_attribute_data.json'), 'a')
-    print("BOOK", book_attr_data, "MERRRR", merge_img_data)
+    json_file = open(os.path.join(settings.MEDIA_ROOT, 'upload', upload_id, 'finalOutput', 'book_attribute_data.json'), 'w+')
     book_attr_data.update({'merge_images': merge_img_data})
     json.dump(book_attr_data, json_file)
     json_file.write("\n")
 
 
 def hello_world(book_attr_data,upload_id, merge_img_data):
-
     print(book_attr_data, upload_id, merge_img_data)
