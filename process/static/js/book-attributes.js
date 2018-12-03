@@ -181,7 +181,7 @@ $(document).ready(function() {
                  var r2 = $("#r2").val();
                  var r3 = $("#r3").val();
                  var r4 = $("#r4").val();
-                 console.log("logsssss",book_width,book_height,book_thickness,material_type,r1,r2,r3,r4)
+                 console.log("logsssss",book_width,book_height,book_thickness,material_type,r1,r2,r3,r4);
 
 
                  var final_data={
@@ -199,6 +199,8 @@ $(document).ready(function() {
                                 "upload_id":upload_id,
                                 "merge_image":window.localStorage.getItem('data')
                 }
+
+                
 
               // Use `jQuery.ajax` method
               $.ajax('/merge-images/', {

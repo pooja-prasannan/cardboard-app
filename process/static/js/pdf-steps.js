@@ -170,7 +170,7 @@ var order_data_array;
                     alert("Please select EVEN number Stack")
                     return false;
                 }
-                $("#next-button").attr("id","build-book");
+                //$("#next-button").attr("id","build-book");
 
             }
             window.selected.length = 0;
@@ -325,8 +325,8 @@ var order_data_array;
     $("#lbl-step-title").append(`&nbsp <button name="save_btn" class="orange-btn" id="save_btn">Save</button>`);
     $("#next-button").html("Build Book");
     $("#next-button").show();
-    $("#next-button").attr("id","build-book");
-    $("#build-book").show();
+    //$("#next-button").attr("id","build-book");
+    //$("#build-book").show();
 
 
     $("#sortable").append(`<div class="add-btn-div"><button name="add_btn" id="add_btn"> Add + </button></div>`);
