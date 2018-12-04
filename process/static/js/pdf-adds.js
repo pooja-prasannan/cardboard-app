@@ -6,7 +6,7 @@ var max1;
 var keys;
 
 $(function () {
-  var dimension = 250*(height/width)
+  var dimension = 250 * (height / width)
   max = 0;
   $('.images-ids').each(function () {
     var value = parseInt($(this).attr('id'));
@@ -104,8 +104,6 @@ $(function () {
 
                       $("#" + parent_id).after(`<div id = ${new_max} class="images-ids" data-order="front_cover" class="ui-state-default">
                                   <img src="#"  width="250px"  class="img-responsive" alt=""> </div>`);
-                                  alert(dimension)
-
                       $("#" + new_max).find('img').attr('src', datas['img_url'][inc]).width(250).height(dimension);
 
                       $("#sortable").sortable({
@@ -172,7 +170,6 @@ $(function () {
 
                     }
                     if (inc % 2 == 0) {
-                      //                                     $("#"+new_max).find("img").show();
                       if (keys == "front") {
                         $("#" + new_max).append(`<div><label for="name">Front Cover</label></div>`);
                       }
@@ -263,12 +260,8 @@ $(function () {
                     });
                     var n_max = max + 1
                     var new_max = n_max.toString()
-                    //                                  data =window.localStorage.getItem('data')
-                    //                                  data = JSON.parse(data)
-
-
                     $("#" + global_max).after(` <div id = ${new_max} class="images-ids"  class="ui-state-default">
-                                      <img src="#" class="img-responsive" alt=""> </div>`)
+                    <img src="#" class="img-responsive" alt=""> </div>`)
                     $("#" + new_max).find('img').attr('src', datas['img_url'][inc]).width(250).height(dimension);
 
                     temp_total_stacks.push(new_max)

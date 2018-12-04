@@ -134,6 +134,8 @@ $(document).ready(function() {
             var bookWdth = $("#book-width").val();
             var bookHgt = $("#book-height").val();
 
+            $(".thickness").css({"width": 600/ratio});
+
             $(".thickness").height(bookthick*50);
             $(".paper").css({"width": (bookWdth/bookHgt)*600});
             $(".side").css({"width": (bookWdth/bookHgt)*600});
