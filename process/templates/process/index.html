@@ -81,8 +81,7 @@ box-sizing: border-box;
              attributes = '{{attributes }}';
           {% endif %}
 
-          var json_datas =JSON.parse(attributes.replace(/&quot;/g,'"'));
-          console.log("json_datas",json_datas)
+        var json_datas =JSON.parse(attributes.replace(/&quot;/g,'"'));
 
         var dimension=250*(height/width)
         var ratios = height/width;
